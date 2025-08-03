@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
-  <title>Simple Stopwatch with Laps</title>
+  <meta charset="UTF-8">
+  <title>Stopwatch web Application</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -58,6 +58,7 @@
     let startTime = 0;
     let elapsedTime = 0;
     let timerInterval;
+    let isRunning = false;
 
     function timeToString(time) {
       const hrs = Math.floor(time / 3600000);
@@ -71,6 +72,8 @@
     }
 
     function start() {
+      if (isRunning) return; // Prevent duplicate intervals
+      isRunning = true;
       startTime = Date.now() - elapsedTime;
       timerInterval = setInterval(() => {
         elapsedTime = Date.now() - startTime;
@@ -80,10 +83,12 @@
 
     function pause() {
       clearInterval(timerInterval);
+      isRunning = false;
     }
 
     function reset() {
       clearInterval(timerInterval);
+      isRunning = false;
       elapsedTime = 0;
       document.getElementById("display").textContent = "00:00:00";
       document.getElementById("laps").innerHTML = '';
