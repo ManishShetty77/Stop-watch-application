@@ -1,32 +1,42 @@
-# ⏱️ Stopwatch Web Application
+⏱️ Stopwatch Web Application
 
-A simple and interactive stopwatch web application built using **HTML**, **CSS**, and **JavaScript**.
+A clean, responsive, and interactive stopwatch built using HTML, CSS, and JavaScript.
 
-## 📋 Description
+📋 Description
 
-This project demonstrates how to build a stopwatch using core web technologies. The stopwatch allows users to:
+This project demonstrates how to build a fully functional stopwatch using core web technologies.
+The stopwatch allows users to:
 
-- Start and pause time tracking
-- Reset the timer
-- Record multiple lap times
+Start and pause time tracking
 
-HTML structures the application layout, CSS handles styling and responsiveness, and JavaScript manages timekeeping logic and UI interactivity.
+Reset the timer to zero
 
-## 🚀 Live Demo
+Record multiple lap times
 
-👉 [View the live stopwatch on GitHub Pages](https://manishshetty77.github.io/Stop-watch-application/)  
-*(Replace with your actual link after deploying)*
 
-## 💡 Features
+HTML defines the application structure, CSS provides styling and responsiveness, and JavaScript handles timekeeping logic and interactivity.
 
-- Start / Pause timer functionality
-- Reset timer to 00:00:00
-- Record lap times without stopping the timer
-- Prevents bugs from multiple start/pause/resets
-- Simple, mobile-friendly UI
 
-## 🛠 Technologies Used
 
-- HTML – Layout and structure
-- CSS – Styling and layout
-- JavaScript – Functionality (start, pause, reset, laps)
+
+🚀 Live Demo
+
+👉 View the Live Stopwatch on GitHub Pages[(https://manishshetty77.github.io/Stop-watch-application/)]
+
+
+
+
+💡 Features
+
+✅ Start / Pause timer functionality
+
+🔄 Reset timer to 00:00:00
+
+🏁 Record lap times without stopping the timer
+
+🛡 Prevents errors from multiple start/pause clicks
+
+📱 Mobile-friendly and responsive UI
+
+🎨 Blue gradient background for a modern look
+
