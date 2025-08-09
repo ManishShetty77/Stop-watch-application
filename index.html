@@ -152,7 +152,6 @@
             color: #2d3436;
         }
 
-        /* Mobile responsiveness */
         @media (max-width: 480px) {
             .container {
                 padding: 20px;
@@ -196,13 +195,11 @@
     </div>
 
     <script>
-        // Variables to track stopwatch state
         let startTime = 0;
         let elapsedTime = 0; 
         let timerInterval = null;
         let isRunning = false;
 
-        // Get DOM elements
         const display = document.getElementById('display');
         const startBtn = document.getElementById('startBtn');
         const pauseBtn = document.getElementById('pauseBtn');
@@ -210,67 +207,56 @@
         const lapBtn = document.getElementById('lapBtn');
         const lapTimes = document.getElementById('lapTimes');
 
-        // Convert milliseconds to MM:SS:MS format
         function formatTime(milliseconds) {
             const totalSeconds = Math.floor(milliseconds / 1000);
             const minutes = Math.floor(totalSeconds / 60);
             const seconds = totalSeconds % 60;
             const ms = Math.floor((milliseconds % 1000) / 10);
             
-            // Add leading zeros
             return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
         }
 
-        // Update the time display
         function updateDisplay() {
             elapsedTime = Date.now() - startTime;
             display.textContent = formatTime(elapsedTime);
         }
 
-        // Start the stopwatch
         function startStopwatch() {
             startTime = Date.now() - elapsedTime;
-            timerInterval = setInterval(updateDisplay, 10); // Update every 10ms
+            timerInterval = setInterval(updateDisplay, 10);
             isRunning = true;
             
-            // Update button states
             startBtn.disabled = true;
             pauseBtn.disabled = false;
             lapBtn.disabled = false;
         }
 
-        // Pause the stopwatch
         function pauseStopwatch() {
             clearInterval(timerInterval);
             isRunning = false;
             
-            // Update button states
             startBtn.disabled = false;
             pauseBtn.disabled = true;
             lapBtn.disabled = true;
         }
 
-        // Reset the stopwatch
         function resetStopwatch() {
             clearInterval(timerInterval);
             elapsedTime = 0;
             isRunning = false;
             display.textContent = '00:00:00';
-            lapTimes.innerHTML = ''; // Clear lap times
+            lapTimes.innerHTML = '';
             
-            // Reset button states
             startBtn.disabled = false;
             pauseBtn.disabled = true;
             lapBtn.disabled = true;
         }
 
-        // Record a lap time
         function recordLap() {
             if (isRunning) {
                 const currentTime = formatTime(elapsedTime);
                 const lapCount = lapTimes.children.length + 1;
                 
-                // Create lap item element
                 const lapItem = document.createElement('div');
                 lapItem.className = 'lap-item';
                 
@@ -279,12 +265,10 @@
                     <span class="lap-time">${currentTime}</span>
                 `;
                 
-                // Add to top of lap times list
                 lapTimes.insertBefore(lapItem, lapTimes.firstChild);
             }
         }
 
-        // Add event listeners to buttons
         startBtn.addEventListener('click', startStopwatch);
         pauseBtn.addEventListener('click', pauseStopwatch);
         resetBtn.addEventListener('click', resetStopwatch);
