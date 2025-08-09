@@ -4,217 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Stopwatch</title>
-
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0;
-            padding: 20px;
-            min-height: 100vh;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
-
-        .container {
-            background: white;
-            padding: 40px;
+        .stopwatch {
+            background: #fff;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
-            max-width: 400px;
-            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            width: 350px;
         }
-
         h1 {
-            color: #2d3436;
-            margin-bottom: 30px;
-            font-size: 28px;
-            font-weight: 300;
+            font-size: 40px;
+            margin: 0 0 20px 0;
+            color: #333;
         }
-
-        .timer-display {
-            font-size: 56px;
-            font-family: 'Courier New', monospace;
-            color: #0984e3;
-            margin: 30px 0;
+        .time {
+            font-size: 48px;
             font-weight: bold;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
+            margin-bottom: 20px;
+            color: #007bff;
         }
-
-        .controls {
+        .buttons {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
-            margin: 30px 0;
-            flex-wrap: wrap;
         }
-
         button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
+            padding: 10px 20px;
             font-size: 16px;
-            font-weight: 600;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            min-width: 100px;
+            transition: background 0.2s;
         }
-
-        button:hover {
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .start-btn {
-            background: #00b894;
+        .start {
+            background: #28a745;
             color: white;
         }
-
-        .start-btn:hover {
-            background: #00a085;
+        .start:hover {
+            background: #218838;
         }
-
-        .pause-btn {
-            background: #fdcb6e;
-            color: #2d3436;
+        .pause {
+            background: #ffc107;
+            color: #212529;
         }
-
-        .pause-btn:hover {
-            background: #f1c40f;
+        .pause:hover {
+            background: #e0a800;
         }
-
-        .reset-btn {
-            background: #e17055;
+        .reset {
+            background: #dc3545;
             color: white;
         }
-
-        .reset-btn:hover {
-            background: #d63031;
+        .reset:hover {
+            background: #c82333;
         }
-
-        .lap-btn {
-            background: #74b9ff;
+        .lap {
+            background: #17a2b8;
             color: white;
         }
-
-        .lap-btn:hover {
-            background: #0984e3;
+        .lap:hover {
+            background: #138496;
         }
-
-        button:disabled {
-            background: #ddd;
-            color: #999;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .lap-section {
-            margin-top: 30px;
-        }
-
-        .lap-section h3 {
-            color: #2d3436;
-            margin-bottom: 15px;
-            font-size: 18px;
-            font-weight: 500;
-        }
-
         .lap-times {
+            margin-top: 20px;
             max-height: 200px;
             overflow-y: auto;
-            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
-
         .lap-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px 15px;
+            padding: 5px 10px;
             margin: 5px 0;
             background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #74b9ff;
+            border-radius: 5px;
+            font-size: 14px;
         }
-
         .lap-number {
-            font-weight: 600;
-            color: #0984e3;
+            font-weight: bold;
+            color: #495057;
         }
-
         .lap-time {
-            font-family: 'Courier New', monospace;
-            color: #2d3436;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .timer-display {
-                font-size: 40px;
-            }
-            
-            .controls {
-                gap: 10px;
-            }
-            
-            button {
-                min-width: 80px;
-                padding: 10px 15px;
-                font-size: 14px;
-            }
+            color: #007bff;
+            font-family: monospace;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>⏱️ Stopwatch</h1>
-
-        <div class="timer-display" id="display">00:00:00</div>
-
-        <div class="controls">
-            <button class="start-btn" id="startBtn">Start</button>
-            <button class="pause-btn" id="pauseBtn" disabled>Pause</button>
-            <button class="reset-btn" id="resetBtn">Reset</button>
-            <button class="lap-btn" id="lapBtn" disabled>Lap</button>
+    <div class="stopwatch">
+        <h1>Stopwatch</h1>
+        <div class="time" id="display">00:00:00</div>
+        <div class="buttons">
+            <button class="start" id="startBtn">Start</button>
+            <button class="pause" id="pauseBtn" disabled>Pause</button>
+            <button class="lap" id="lapBtn" disabled>Lap</button>
+            <button class="reset" id="resetBtn">Reset</button>
         </div>
-
-        <div class="lap-section">
-            <h3>Lap Times</h3>
-            <div class="lap-times" id="lapTimes"></div>
-        </div>
+        <div class="lap-times" id="lapTimes"></div>
     </div>
-
     <script>
         let startTime = 0;
-        let elapsedTime = 0; 
+        let elapsedTime = 0;
         let timerInterval = null;
-        let isRunning = false;
+        let running = false;
+        let lapCounter = 0;
+        let lapTimes = [];
+        const display = document.getElementById("display");
+        const startBtn = document.getElementById("startBtn");
+        const pauseBtn = document.getElementById("pauseBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const lapBtn = document.getElementById("lapBtn");
+        const lapTimesContainer = document.getElementById("lapTimes");
 
-        const display = document.getElementById('display');
-        const startBtn = document.getElementById('startBtn');
-        const pauseBtn = document.getElementById('pauseBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const lapBtn = document.getElementById('lapBtn');
-        const lapTimes = document.getElementById('lapTimes');
-
-        function formatTime(milliseconds) {
-            const totalSeconds = Math.floor(milliseconds / 1000);
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
             const minutes = Math.floor(totalSeconds / 60);
             const seconds = totalSeconds % 60;
-            const ms = Math.floor((milliseconds % 1000) / 10);
-            
-            return `${minutes.toString().padStart(2, '0')}:` +
-                   `${seconds.toString().padStart(2, '0')}:` +
-                   `${ms.toString().padStart(2, '0')}`;
+            const centiseconds = Math.floor((ms % 1000) / 10);
+            return (
+                String(minutes).padStart(2, "0") + ":" +
+                String(seconds).padStart(2, "0") + ":" +
+                String(centiseconds).padStart(2, "0")
+            );
         }
 
         function updateDisplay() {
@@ -225,7 +148,7 @@
         function startStopwatch() {
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(updateDisplay, 10);
-            isRunning = true;
+            running = true;
             startBtn.disabled = true;
             pauseBtn.disabled = false;
             lapBtn.disabled = false;
@@ -233,7 +156,7 @@
 
         function pauseStopwatch() {
             clearInterval(timerInterval);
-            isRunning = false;
+            running = false;
             startBtn.disabled = false;
             pauseBtn.disabled = true;
             lapBtn.disabled = true;
@@ -242,32 +165,42 @@
         function resetStopwatch() {
             clearInterval(timerInterval);
             elapsedTime = 0;
-            isRunning = false;
-            display.textContent = '00:00:00';
-            lapTimes.innerHTML = '';
+            running = false;
+            lapCounter = 0;
+            lapTimes = [];
+            display.textContent = "00:00:00";
             startBtn.disabled = false;
             pauseBtn.disabled = true;
             lapBtn.disabled = true;
+            lapTimesContainer.innerHTML = "";
         }
 
         function recordLap() {
-            if (isRunning) {
+            if (running) {
+                lapCounter++;
                 const currentTime = formatTime(elapsedTime);
-                const lapCount = lapTimes.children.length + 1;
-                const lapItem = document.createElement('div');
-                lapItem.className = 'lap-item';
+                const lapTime = lapCounter === 1 ? currentTime : formatTime(elapsedTime - (lapTimes[lapTimes.length - 1]?.totalTime || 0));
+                
+                lapTimes.push({
+                    number: lapCounter,
+                    time: lapTime,
+                    totalTime: elapsedTime
+                });
+                
+                const lapItem = document.createElement("div");
+                lapItem.className = "lap-item";
                 lapItem.innerHTML = `
-                    <span class="lap-number">Lap ${lapCount}</span>
-                    <span class="lap-time">${currentTime}</span>
+                    <span class="lap-number">Lap ${lapCounter}</span>
+                    <span class="lap-time">${lapTime}</span>
                 `;
-                lapTimes.insertBefore(lapItem, lapTimes.firstChild);
+                lapTimesContainer.insertBefore(lapItem, lapTimesContainer.firstChild);
             }
         }
 
-        startBtn.addEventListener('click', startStopwatch);
-        pauseBtn.addEventListener('click', pauseStopwatch);
-        resetBtn.addEventListener('click', resetStopwatch);
-        lapBtn.addEventListener('click', recordLap);
+        startBtn.addEventListener("click", startStopwatch);
+        pauseBtn.addEventListener("click", pauseStopwatch);
+        resetBtn.addEventListener("click", resetStopwatch);
+        lapBtn.addEventListener("click", recordLap);
     </script>
 </body>
 </html>
